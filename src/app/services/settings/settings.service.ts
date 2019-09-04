@@ -1,0 +1,47 @@
+import { Injectable, Inject } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
+
+@Injectable()
+
+export class SettingsService {
+
+  ajustes: Ajustes = {
+    themeUrl: 'assets/css/colors/default-dark.css',
+    theme: 'default-dark'
+  };
+
+  constructor( @Inject(DOCUMENT) private _document ) {
+    this.cargarAjustes();
+  }
+
+  guardarAjustes() {
+    localStorage.setItem('ajustes', JSON.stringify( this.ajustes ));
+  }
+
+  cargarAjustes() {
+    if ( localStorage.getItem('ajustes')) {
+      this.ajustes = JSON.parse( localStorage.getItem('ajustes'));
+
+      this.aplicarTema( this.ajustes.theme );
+    } else {
+
+      this.aplicarTema( this.ajustes.theme );
+    }
+  }
+
+  aplicarTema( theme: string ) {
+
+    const url = `assets/css/colors/${ theme }.css`;
+    this._document.getElementById('theme').setAttribute('href', url);
+
+    this.ajustes.theme = theme;
+    this.ajustes.themeUrl = url;
+
+    this.guardarAjustes();
+  }
+}
+
+interface Ajustes {
+  themeUrl: string;
+  theme: string;
+}
