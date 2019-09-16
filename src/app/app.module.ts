@@ -8,7 +8,7 @@ import { RegisterComponent } from './register/register.component';
 
 // Módulos
 import { PagesModules } from './pages/pages.module';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 // Servicios
 import { ServiceModule } from './services/service.module';
@@ -24,6 +24,7 @@ import { ServiceModule } from './services/service.module';
     PagesModules,
     AppRoutingModule,
     FormsModule,
+    ReactiveFormsModule,
     ServiceModule
   ],
   providers: [],
